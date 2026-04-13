@@ -9,21 +9,15 @@
 
 #### 1. 进入项目目录
 
-\`\`\`
 cd todo-list-rn
-\`\`\`
 
 #### 2. 安装项目依赖
 
-\`\`\`
 npm install
-\`\`\`
 
 #### 3. 启动开发服务器
 
-\`\`\`
 npm start
-\`\`\`
 
 ### 运行环境
 
@@ -31,26 +25,19 @@ npm start
 
 #### **在浏览器中运行 (Web)**
 
-\`\`\`
-# 启动后按 'w' 键，或使用命令：
 npm run web
-\`\`\`
 
 访问 `http://localhost:8081` 在浏览器中测试应用。
 
 #### **在 iOS 模拟器中运行**
 
-\`\`\`
 npm run ios
-\`\`\`
 
 需要 macOS 和 Xcode 环境。
 
 #### **在 Android 模拟器中运行**
 
-\`\`\`
 npm run android
-\`\`\`
 
 需要 Android Studio 和 Android 模拟器。
 
@@ -64,7 +51,6 @@ npm run android
 
 ## 📁 项目结构
 
-\`\`\`
 todo-list-rn/
 ├── app/                           # 应用主目录（Expo Router）
 │   ├── _layout.tsx               # 根布局，配置路由和状态提供者
@@ -93,5 +79,4 @@ todo-list-rn/
 ├── app.json                       # Expo 配置
 ├── eslint.config.js               # ESLint 配置
 └── README.md                      # 项目说明文档
-\`\`\`
 
