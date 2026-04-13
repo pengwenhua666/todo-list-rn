@@ -9,19 +9,19 @@
 
 #### 1. 进入项目目录
 
-\`\`\`bash
+\`\`\`
 cd todo-list-rn
 \`\`\`
 
 #### 2. 安装项目依赖
 
-\`\`\`bash
+\`\`\`
 npm install
 \`\`\`
 
 #### 3. 启动开发服务器
 
-\`\`\`bash
+\`\`\`
 npm start
 \`\`\`
 
@@ -31,7 +31,7 @@ npm start
 
 #### **在浏览器中运行 (Web)**
 
-\`\`\`bash
+\`\`\`
 # 启动后按 'w' 键，或使用命令：
 npm run web
 \`\`\`
@@ -40,7 +40,7 @@ npm run web
 
 #### **在 iOS 模拟器中运行**
 
-\`\`\`bash
+\`\`\`
 npm run ios
 \`\`\`
 
@@ -48,7 +48,7 @@ npm run ios
 
 #### **在 Android 模拟器中运行**
 
-\`\`\`bash
+\`\`\`
 npm run android
 \`\`\`
 
