@@ -62,18 +62,25 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
 
           <ScrollView style={styles.form}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>任务标题 *</Text>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>任务标题 *</Text>
+                <Text style={styles.charCount}>{title.length}/25</Text>
+              </View>
               <TextInput
                 style={styles.input}
                 placeholder="输入任务标题"
                 value={title}
                 onChangeText={setTitle}
                 placeholderTextColor="#999"
+                maxLength={25}
               />
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>任务描述</Text>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>任务描述</Text>
+                <Text style={styles.charCount}>{description.length}/1000</Text>
+              </View>
               <TextInput
                 style={[styles.input, styles.descriptionInput]}
                 placeholder="输入任务描述（可选）"
@@ -83,6 +90,7 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"
+                maxLength={1000}
               />
             </View>
           </ScrollView>
@@ -156,11 +164,20 @@ const styles = StyleSheet.create({
   inputGroup: {
     marginBottom: 16,
   },
+  labelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
   label: {
     fontSize: 14,
     fontWeight: '600',
-    marginBottom: 8,
     color: '#333',
+  },
+  charCount: {
+    fontSize: 12,
+    color: '#999',
   },
   input: {
     borderWidth: 1,
