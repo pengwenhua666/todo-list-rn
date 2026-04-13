@@ -5,12 +5,12 @@ import {
   ActivityIndicator,
   Alert,
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { AddTodoModal } from "../components/AddTodoModal";
 import { TodoItem } from "../components/TodoItem";
 import { useTodo } from "../contexts/TodoContext";
