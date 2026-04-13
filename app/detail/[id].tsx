@@ -1,12 +1,12 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTodo } from "../../contexts/TodoContext";
@@ -34,10 +34,10 @@ export default function TodoDetail() {
         <View style={styles.centerContainer}>
           <Text style={styles.errorText}>任务不存在</Text>
           <TouchableOpacity
-            style={styles.backButton}
+            style={styles.backBtn}
             onPress={() => router.back()}
           >
-            <Text style={styles.backButtonText}>返回列表</Text>
+            <Text style={styles.backBtnText}>返回列表</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -48,9 +48,21 @@ export default function TodoDetail() {
   const statusColor = todo.status === "completed" ? "#34C759" : "#FF9500";
 
   const handleStatusToggle = () => {
-    updateTodoStatus(
-      todo.id,
-      todo.status === "completed" ? "pending" : "completed"
+    const newStatus = todo.status === "completed" ? "pending" : "completed";
+    const actionText = newStatus === "completed" ? "完成" : "未完成";
+
+    Alert.alert(
+      "切换任务状态",
+      `确定要将任务标记为${actionText}吗？`,
+      [
+        { text: "取消", style: "cancel" },
+        {
+          text: "确定",
+          onPress: () => {
+            updateTodoStatus(todo.id, newStatus);
+          },
+        },
+      ]
     );
   };
 

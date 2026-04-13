@@ -71,6 +71,11 @@ export default function Index() {
         style: "destructive",
         onPress: () => {
           deleteTodo(id);
+          setSelectedIds(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(id);
+            return newSet;
+          });
         },
       },
     ]);
