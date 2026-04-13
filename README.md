@@ -49,7 +49,7 @@ npm run android
 4. Expo Go 会自动加载和运行应用
 
 
-## 📁 项目结构
+##  项目结构
 
 todo-list-rn/
 ├── app/                           # 应用主目录（Expo Router）
