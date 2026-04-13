@@ -1,30 +1,34 @@
+// 导入React hooks和React Native组件
 import React, { useState } from 'react';
 import {
-    KeyboardAvoidingView,
-    Modal,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
+// 定义AddTodoModal组件的props接口
 interface AddTodoModalProps {
-  visible: boolean;
-  onClose: () => void;
-  onAdd: (title: string, description?: string) => void;
+  visible: boolean; // 弹出框是否可见
+  onClose: () => void; // 关闭弹出框的回调
+  onAdd: (title: string, description?: string) => void; // 添加任务的回调
 }
 
+// AddTodoModal组件：用于添加新任务的弹出框
 export const AddTodoModal: React.FC<AddTodoModalProps> = ({
   visible,
   onClose,
   onAdd,
 }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState(''); // 任务标题状态
+  const [description, setDescription] = useState(''); // 任务描述状态
 
+  // 添加任务
   const handleAdd = () => {
     if (title.trim()) {
       onAdd(title.trim(), description.trim() || undefined);
@@ -34,6 +38,7 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
     }
   };
 
+  // 关闭弹出框
   const handleClose = () => {
     setTitle('');
     setDescription('');
@@ -51,8 +56,10 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
+        {/* 背景遮罩 */}
         <View style={styles.overlay} />
         <View style={styles.modalContent}>
+          {/* 头部标题和关闭按钮 */}
           <View style={styles.header}>
             <Text style={styles.headerTitle}>添加新任务</Text>
             <TouchableOpacity onPress={handleClose}>
@@ -60,7 +67,9 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
             </TouchableOpacity>
           </View>
 
+          {/* 表单内容 */}
           <ScrollView style={styles.form}>
+            {/* 任务标题输入 */}
             <View style={styles.inputGroup}>
               <View style={styles.labelRow}>
                 <Text style={styles.label}>任务标题 *</Text>
@@ -76,6 +85,7 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
               />
             </View>
 
+            {/* 任务描述输入 */}
             <View style={styles.inputGroup}>
               <View style={styles.labelRow}>
                 <Text style={styles.label}>任务描述</Text>
@@ -95,6 +105,7 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
             </View>
           </ScrollView>
 
+          {/* 底部按钮 */}
           <View style={styles.footer}>
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
@@ -121,6 +132,7 @@ export const AddTodoModal: React.FC<AddTodoModalProps> = ({
   );
 };
 
+// 样式定义
 const styles = StyleSheet.create({
   container: {
     flex: 1,

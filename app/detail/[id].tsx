@@ -1,3 +1,4 @@
+// 导入Expo Router的路由hooks
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import {
@@ -8,16 +9,25 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+// 导入SafeAreaView用于安全区域处理
 import { SafeAreaView } from "react-native-safe-area-context";
+// 导入Todo上下文hook
 import { useTodo } from "../../contexts/TodoContext";
 
+// 任务详情页面组件：显示单个任务的详细信息，支持状态切换和删除
 export default function TodoDetail() {
   const router = useRouter();
+
+  // 获取路由参数中的任务ID
   const { id } = useLocalSearchParams<{ id: string }>();
+
+  // 从上下文获取任务相关状态和方法
   const { todos, loading, updateTodoStatus, deleteTodo } = useTodo();
 
+  // 根据ID查找当前任务
   const todo = todos.find((t) => t.id === id);
 
+  // 加载状态显示
   if (loading) {
     return (
       <SafeAreaView style={styles.container}>
@@ -28,6 +38,7 @@ export default function TodoDetail() {
     );
   }
 
+  // 任务不存在时的错误显示
   if (!todo) {
     return (
       <SafeAreaView style={styles.container}>
@@ -44,9 +55,11 @@ export default function TodoDetail() {
     );
   }
 
+  // 根据任务状态确定显示文本和颜色
   const statusText = todo.status === "completed" ? "已完成" : "未完成";
   const statusColor = todo.status === "completed" ? "#34C759" : "#FF9500";
 
+  // 任务状态切换
   const handleStatusToggle = () => {
     const newStatus = todo.status === "completed" ? "pending" : "completed";
     const actionText = newStatus === "completed" ? "完成" : "未完成";
@@ -66,6 +79,7 @@ export default function TodoDetail() {
     );
   };
 
+  // 任务删除
   const handleDelete = () => {
     Alert.alert("删除任务", "确定要删除这个任务吗？", [
       { text: "取消", style: "cancel" },
@@ -83,11 +97,13 @@ export default function TodoDetail() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
+        {/* 任务标题部分 */}
         <View style={styles.section}>
           <Text style={styles.label}>任务标题</Text>
           <Text style={styles.title}>{todo.title}</Text>
         </View>
 
+        {/* 任务状态部分 */}
         <View style={styles.section}>
           <Text style={styles.label}>状态</Text>
           <View style={styles.statusContainer}>
@@ -104,6 +120,7 @@ export default function TodoDetail() {
           </View>
         </View>
 
+        {/* 任务描述部分 */}
         {todo.description ? (
           <View style={styles.section}>
             <Text style={styles.label}>任务描述</Text>
@@ -113,6 +130,7 @@ export default function TodoDetail() {
           </View>
         ) : null}
 
+        {/* 操作按钮部分 */}
         <View style={styles.section}>
           <View style={styles.actionButtons}>
             <TouchableOpacity
@@ -139,6 +157,7 @@ export default function TodoDetail() {
   );
 }
 
+// 样式定义
 const styles = StyleSheet.create({
   container: {
     flex: 1,

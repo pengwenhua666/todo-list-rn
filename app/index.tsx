@@ -1,4 +1,6 @@
+// 导入Ionicons图标库
 import { Ionicons } from "@expo/vector-icons";
+// 导入Expo Router的路由hook
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -10,27 +12,35 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+// 导入SafeAreaView用于安全区域处理
 import { SafeAreaView } from "react-native-safe-area-context";
+// 导入自定义组件
 import { AddTodoModal } from "../components/AddTodoModal";
 import { TodoItem } from "../components/TodoItem";
+// 导入Todo上下文hook
 import { useTodo } from "../contexts/TodoContext";
 
+// 主页面组件：显示任务列表，支持添加、删除、状态切换等操作
 export default function Index() {
   const router = useRouter();
+  // 从上下文获取任务相关状态和方法
   const { todos, loading, addTodo, deleteTodo, updateTodoStatus, deleteBatch } =
     useTodo();
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [modalVisible, setModalVisible] = useState(false); // 添加任务弹出框状态
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set()); // 选中的任务ID集合
 
+  // 添加任务
   const handleAddTodo = (title: string, description?: string) => {
     addTodo(title, description);
   };
 
+  // 跳转到任务详情页
   const handleGoToDetail = (id: string) => {
     router.push(`/detail/${id}`);
   };
 
+  // 任务选择/取消选择
   const handleSelectTodo = (id: string, isSelected: boolean) => {
     const newSelected = new Set(selectedIds);
     if (isSelected) {
@@ -41,6 +51,7 @@ export default function Index() {
     setSelectedIds(newSelected);
   };
 
+  // 任务状态切换
   const handleStatusToggle = (id: string) => {
     const todo = todos.find(t => t.id === id);
     if (!todo) return;
@@ -63,6 +74,7 @@ export default function Index() {
     );
   };
 
+  // 单个任务删除
   const handleDeleteTodo = (id: string) => {
     Alert.alert("删除任务", "确定要删除这个任务吗？", [
       { text: "取消", style: "cancel" },
@@ -81,6 +93,7 @@ export default function Index() {
     ]);
   };
 
+  // 批量删除选中任务
   const handleDeleteSelected = () => {
     if (selectedIds.size === 0) return;
 
@@ -101,6 +114,7 @@ export default function Index() {
     );
   };
 
+  // 加载状态显示
   if (loading) {
     return (
       <View style={styles.centerContainer}>
@@ -109,6 +123,7 @@ export default function Index() {
     );
   }
 
+  // 空列表提示组件
   const emptyListMessage = (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyText}>暂无任务</Text>
@@ -120,6 +135,7 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* 头部按钮区域 */}
       <View style={styles.header}>
         <TouchableOpacity
           style={[
@@ -151,6 +167,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
+      {/* 任务列表 */}
       <FlatList
         data={todos}
         keyExtractor={(item) => item.id}
@@ -168,6 +185,7 @@ export default function Index() {
         scrollEnabled={true}
       />
 
+      {/* 添加任务模态框 */}
       <AddTodoModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
@@ -177,6 +195,7 @@ export default function Index() {
   );
 }
 
+// 样式定义
 const styles = StyleSheet.create({
   container: {
     flex: 1,
