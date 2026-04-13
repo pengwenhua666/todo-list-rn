@@ -1,50 +1,97 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+### 前置要求
 
-## Get started
+- **Node.js**：v22.0.0 或更高版本
+- **npm**：v10.0.0 或更高版本
+- **Expo Go**（用于在手机上测试，可选）
 
-1. Install dependencies
+### 安装步骤
 
-   ```bash
-   npm install
-   ```
+#### 1. 进入项目目录
 
-2. Start the app
+\`\`\`bash
+cd todo-list-rn
+\`\`\`
 
-   ```bash
-   npx expo start
-   ```
+#### 2. 安装项目依赖
 
-In the output, you'll find options to open the app in a
+\`\`\`bash
+npm install
+\`\`\`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+#### 3. 启动开发服务器
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+\`\`\`bash
+npm start
+\`\`\`
 
-## Get a fresh project
+### 运行环境
 
-When you're ready, run:
+根据你的需求选择不同的运行方式：
 
-```bash
-npm run reset-project
-```
+#### **在浏览器中运行 (Web)**
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+\`\`\`bash
+# 启动后按 'w' 键，或使用命令：
+npm run web
+\`\`\`
 
-## Learn more
+访问 `http://localhost:8081` 在浏览器中测试应用。
 
-To learn more about developing your project with Expo, look at the following resources:
+#### **在 iOS 模拟器中运行**
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+\`\`\`bash
+npm run ios
+\`\`\`
 
-## Join the community
+需要 macOS 和 Xcode 环境。
 
-Join our community of developers creating universal apps.
+#### **在 Android 模拟器中运行**
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+\`\`\`bash
+npm run android
+\`\`\`
+
+需要 Android Studio 和 Android 模拟器。
+
+#### **在手机上运行 (Expo Go)**
+
+1. 在手机上安装 Expo Go 应用
+2. 在 iOS 上用相机应用扫描二维码（自动打开 Expo Go）
+3. 在 Android 上用 Expo Go 应用扫描二维码
+4. Expo Go 会自动加载和运行应用
+
+
+## 📁 项目结构
+
+\`\`\`
+todo-list-rn/
+├── app/                           # 应用主目录（Expo Router）
+│   ├── _layout.tsx               # 根布局，配置路由和状态提供者
+│   ├── index.tsx                 # 任务列表页面
+│   └── detail/
+│       └── [id].tsx              # 任务详情页面（动态路由）
+│
+├── components/                    # React 组件
+│   ├── TodoItem.tsx              # 任务列表项组件
+│   └── AddTodoModal.tsx           # 添加任务模态框
+│
+├── contexts/                      # React Context（全局状态管理）
+│   └── TodoContext.tsx            # 任务状态和操作
+│
+├── types/                         # TypeScript 类型定义
+│   └── todo.ts                   # Todo 数据结构
+│
+├── utils/                         # 工具函数
+│   └── storage.ts                # AsyncStorage 数据持久化
+│
+├── assets/                        # 静态资源
+│   └── images/                   # 应用图标和图片
+│
+├── package.json                   # 项目依赖配置
+├── tsconfig.json                  # TypeScript 配置
+├── app.json                       # Expo 配置
+├── eslint.config.js               # ESLint 配置
+└── README.md                      # 项目说明文档
+\`\`\`
+
